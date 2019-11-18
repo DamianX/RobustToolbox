@@ -49,7 +49,7 @@ namespace Robust.Shared.Serialization
         }
 
         // Use NewReader or NewWriter instead.
-        private YamlObjectSerializer()
+        public YamlObjectSerializer()
         {
         }
 
@@ -566,7 +566,7 @@ namespace Robust.Shared.Serialization
                 foreach (var entry in (IEnumerable)obj)
                 {
                     var entryNode = TypeToNode(entry);
-                    
+
                     // write the concrete type tag
                     if (listType.IsAbstract || listType.IsInterface)
                     {

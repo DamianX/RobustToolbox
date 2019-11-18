@@ -51,7 +51,7 @@ namespace Robust.Shared.Interfaces.Configuration
 
         /// <summary>
         /// Get the value of a CVar.
-        /// </summary>
+        /// </summary>m
         /// <typeparam name="T">The Type of the CVar value.</typeparam>
         /// <param name="name">The name of the CVar.</param>
         /// <returns></returns>
