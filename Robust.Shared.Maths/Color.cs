@@ -775,7 +775,7 @@ namespace Robust.Shared.Maths
         }
 #endif
 
-        public static Color FromHex(string hexColor, Color? fallback = null)
+        public static Color? TryFromHex(string hexColor)
         {
             if (hexColor.Length > 0 && hexColor[0] == '#')
             {
@@ -812,6 +812,15 @@ namespace Robust.Shared.Maths
                         Convert.ToByte(b + b, 16));
                 }
             }
+
+            return null;
+        }
+
+        public static Color FromHex(string hexColor, Color? fallback = null)
+        {
+            var color = TryFromHex(hexColor);
+            if (color.HasValue)
+                return color.Value;
 
             if (fallback.HasValue)
                 return fallback.Value;

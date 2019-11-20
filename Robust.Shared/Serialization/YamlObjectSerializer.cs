@@ -816,15 +816,8 @@ namespace Robust.Shared.Serialization
 
             public override YamlNode TypeToNode(object obj, YamlObjectSerializer serializer)
             {
-                var color = (Color)obj;
-
-                Int32 hexColor = 0;
-                hexColor += color.RByte << 24;
-                hexColor += color.GByte << 16;
-                hexColor += color.BByte << 8;
-                hexColor += color.AByte;
-
-                return new YamlScalarNode("#" + hexColor.ToString("X"));
+                var color = (Color) obj;
+                return new YamlScalarNode(color.ToHex());
             }
         }
 
