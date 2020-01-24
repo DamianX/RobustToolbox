@@ -107,19 +107,19 @@ namespace Robust.Client.UserInterface
             RootControl.Size = _displayManager.ScreenSize / UIScale;
             _displayManager.OnWindowResized += args => _updateRootSize();
 
-            StateRoot = new LayoutContainer
-            {
-                Name = "StateRoot",
-                MouseFilter = Control.MouseFilterMode.Ignore
-            };
-            RootControl.AddChild(StateRoot);
-
             WindowRoot = new LayoutContainer
             {
                 Name = "WindowRoot",
                 MouseFilter = Control.MouseFilterMode.Ignore
             };
             RootControl.AddChild(WindowRoot);
+
+            StateRoot = new LayoutContainer
+            {
+                Name = "StateRoot",
+                MouseFilter = Control.MouseFilterMode.Ignore
+            };
+            RootControl.AddChild(StateRoot);
 
             PopupRoot = new LayoutContainer
             {
