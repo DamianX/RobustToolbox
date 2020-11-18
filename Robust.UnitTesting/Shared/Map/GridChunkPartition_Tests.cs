@@ -38,13 +38,13 @@ namespace Robust.UnitTesting.Shared.Map
             . 2 3 4
             1 2 . .
             */
-            Assert.That(rects[0], Is.EqualTo(new Box2(0, 0, 1, 1)));
-            Assert.That(rects[1], Is.EqualTo(new Box2(0, 3, 1, 4)));
-            Assert.That(rects[2], Is.EqualTo(new Box2(1, 0, 2, 4)));
-            Assert.That(rects[3], Is.EqualTo(new Box2(2, 1, 3, 3)));
-            Assert.That(rects[4], Is.EqualTo(new Box2(3, 2, 4, 3)));
+            Assert.That(rects[0], Is.EqualTo(new Box2(1, 1, 0, 0)));
+            Assert.That(rects[1], Is.EqualTo(new Box2(4, 1, 3, 0)));
+            Assert.That(rects[2], Is.EqualTo(new Box2(4, 2, 0, 1)));
+            Assert.That(rects[3], Is.EqualTo(new Box2(3, 3, 1, 2)));
+            Assert.That(rects[4], Is.EqualTo(new Box2(3, 4, 2, 3)));
 
-            Assert.That(bounds, Is.EqualTo(new Box2i(0,0,4,4)));
+            Assert.That(bounds, Is.EqualTo(new Box2i(4, 4, 0, 0)));
         }
 
         // origin is top left
@@ -69,9 +69,9 @@ namespace Robust.UnitTesting.Shared.Map
             Assert.That(rects.Count, Is.EqualTo(1));
 
             // box origin is bottom left
-            Assert.That(rects[0], Is.EqualTo(new Box2(1,0,3,3)));
+            Assert.That(rects[0], Is.EqualTo(new Box2(3, 3, 0, 1)));
 
-            Assert.That(bounds, Is.EqualTo(new Box2i(1, 0, 3, 3)));
+            Assert.That(bounds, Is.EqualTo(new Box2i(3, 3, 0, 1)));
         }
 
         private static IMapChunkInternal ChunkFactory(ushort size, int[] tiles)

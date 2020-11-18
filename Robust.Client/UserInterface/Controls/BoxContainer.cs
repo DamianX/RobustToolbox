@@ -152,11 +152,11 @@ namespace Robust.Client.UserInterface.Controls
                 UIBox2i targetBox;
                 if (Vertical)
                 {
-                    targetBox = new UIBox2i(0, offset, PixelWidth, offset+size);
+                    targetBox = new UIBox2i(offset, PixelWidth, offset+size, 0);
                 }
                 else
                 {
-                    targetBox = new UIBox2i(offset, 0, offset+size, PixelHeight);
+                    targetBox = new UIBox2i(0, offset+size, PixelHeight, offset);
                 }
 
                 FitChildInPixelBox(control, targetBox);

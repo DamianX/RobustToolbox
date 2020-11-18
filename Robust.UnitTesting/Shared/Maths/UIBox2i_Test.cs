@@ -68,10 +68,10 @@ namespace Robust.UnitTesting.Shared.Maths
         private static IEnumerable<(UIBox2i a, UIBox2i b, UIBox2i? expected)> Intersections =>
             new (UIBox2i, UIBox2i, UIBox2i?)[]
             {
-                (new UIBox2i(0, 0, 5, 5), new UIBox2i(2, 2, 4, 4), new UIBox2i(2, 2, 4, 4)),
-                (new UIBox2i(0, 0, 5, 5), new UIBox2i(3, 3, 7, 7), new UIBox2i(3, 3, 5, 5)),
-                (new UIBox2i(2, 0, 5, 5), new UIBox2i(0, 3, 4, 7), new UIBox2i(2, 3, 4, 5)),
-                (new UIBox2i(2, 0, 5, 5), new UIBox2i(6, 6, 10, 10), null),
+                (new UIBox2i(0, 5, 5, 0), new UIBox2i(2, 4, 4, 2), new UIBox2i(2, 4, 4, 2)),
+                (new UIBox2i(0, 5, 5, 0), new UIBox2i(3, 7, 7, 3), new UIBox2i(3, 5, 5, 3)),
+                (new UIBox2i(0, 5, 5, 2), new UIBox2i(3, 4, 7, 0), new UIBox2i(3, 4, 5, 2)),
+                (new UIBox2i(0, 5, 5, 2), new UIBox2i(6, 10, 10, 6), null),
             };
 
         [Test]
@@ -90,7 +90,7 @@ namespace Robust.UnitTesting.Shared.Maths
         public void Box2iEdgesConstructor([ValueSource(nameof(Sources))] (int, int, int, int) test)
         {
             var (left, top, right, bottom) = test;
-            var box = new UIBox2i(left, top, right, bottom);
+            var box = new UIBox2i(top, right, bottom, left);
 
             Assert.That(box.Left, Is.EqualTo(left));
             Assert.That(box.Top, Is.EqualTo(top));
@@ -102,7 +102,7 @@ namespace Robust.UnitTesting.Shared.Maths
         public void Box2iCornerVectorProperties([ValueSource(nameof(Sources))] (int, int, int, int) test)
         {
             var (left, top, right, bottom) = test;
-            var box = new UIBox2i(left, top, right, bottom);
+            var box = new UIBox2i(top, right, bottom, left);
 
             var br = new Vector2i(right, bottom);
             var tl = new Vector2i(left, top);
@@ -156,7 +156,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2iNotContainsSelfOpen()
         {
-            var box = new UIBox2i(-1, -1, 1, 1);
+            var box = new UIBox2i(-1, 1, 1, -1);
 
             Assert.That(box.Contains(box.BottomLeft, false), Is.False);
             Assert.That(box.Contains(box.TopLeft, false), Is.False);
@@ -167,7 +167,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2iContainsSelfClosed()
         {
-            var box = new UIBox2i(-1, -1, 1, 1);
+            var box = new UIBox2i(-1, 1, 1, -1);
 
             Assert.That(box.Contains(box.BottomLeft));
             Assert.That(box.Contains(box.TopLeft));
@@ -192,7 +192,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2i(x, y);
 
-            var box = new UIBox2i(-2, -2, 2, 2);
+            var box = new UIBox2i(-2, 2, 2, -2);
 
             Assert.That(box.Contains(x, y));
             Assert.That(box.Contains(vec));
@@ -206,7 +206,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2i(x, y);
 
-            var box = new UIBox2i(-2, -2, 2, 2);
+            var box = new UIBox2i(-2, 2, 2, -2);
 
             Assert.That(box.Contains(x, y), Is.False);
             Assert.That(box.Contains(vec), Is.False);
@@ -220,7 +220,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2i(x, y);
 
-            var box = new UIBox2i(-1, -1, 1, 1);
+            var box = new UIBox2i(-1, 1, 1, -1);
             var scaledBox = box.Translated(vec);
 
             Assert.That(scaledBox.Left, Is.EqualTo(box.Left + x));
@@ -234,9 +234,9 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (left, top, right, bottom) = test;
 
-            var controlBox = new UIBox2i(left, top, right, bottom);
-            var differentBox = new UIBox2i(-3, -3, 3, 3);
-            var sameBox = new UIBox2i(left, top, right, bottom);
+            var controlBox = new UIBox2i(top, right, bottom, left);
+            var differentBox = new UIBox2i(-3, 3, 3, -3);
+            var sameBox = new UIBox2i(top, right, bottom, left);
             Object sameBoxAsObject = sameBox;
             UIBox2i? nullBox = null;
             Vector2i notBox = new Vector2i(left, top);

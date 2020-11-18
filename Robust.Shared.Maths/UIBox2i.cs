@@ -18,11 +18,11 @@ namespace Robust.Shared.Maths
         public readonly int Height => Math.Abs(Top - Bottom);
         public readonly Vector2i Size => new Vector2i(Width, Height);
 
-        public UIBox2i(Vector2i topLeft, Vector2i bottomRight) : this(topLeft.X, topLeft.Y, bottomRight.X, bottomRight.Y)
+        public UIBox2i(Vector2i topLeft, Vector2i bottomRight) : this(topLeft.Y, bottomRight.X, bottomRight.Y, topLeft.X)
         {
         }
 
-        public UIBox2i(int left, int top, int right, int bottom)
+        public UIBox2i(int top, int right, int bottom, int left)
         {
             Left = left;
             Right = right;
@@ -32,7 +32,7 @@ namespace Robust.Shared.Maths
 
         public static UIBox2i FromDimensions(int left, int top, int width, int height)
         {
-            return new UIBox2i(left, top, left + width, top + height);
+            return new UIBox2i(top, left + width, top + height, left);
         }
 
         public static UIBox2i FromDimensions(Vector2i position, Vector2i size)
@@ -59,7 +59,7 @@ namespace Robust.Shared.Maths
         /// <summary>Returns a UIBox2 translated by the given amount.</summary>
         public readonly UIBox2i Translated(Vector2i point)
         {
-            return new UIBox2i(Left + point.X, Top + point.Y, Right + point.X, Bottom + point.Y);
+            return new UIBox2i(Top + point.Y, Right + point.X, Bottom + point.Y, Left + point.X);
         }
 
         /// <summary>
@@ -115,19 +115,19 @@ namespace Robust.Shared.Maths
 
         public static explicit operator UIBox2i(UIBox2 box)
         {
-            return new UIBox2i((int) box.Left, (int) box.Top, (int) box.Right, (int) box.Bottom);
+            return new UIBox2i((int) box.Top, (int) box.Right, (int) box.Bottom, (int) box.Left);
         }
 
         public static implicit operator UIBox2(UIBox2i box)
         {
-            return new UIBox2(box.Left, box.Top, box.Right, box.Bottom);
+            return new UIBox2(box.Top, box.Right, box.Bottom, box.Left);
         }
 
         public static UIBox2i operator +(UIBox2i box, (int lo, int to, int ro, int bo) offsets)
         {
             var (lo, to, ro, bo) = offsets;
 
-            return new UIBox2i(box.Left + lo, box.Top + to, box.Right + ro, box.Bottom + bo);
+            return new UIBox2i(box.Top + to, box.Right + ro, box.Bottom + bo, box.Left + lo);
         }
 
         public override readonly string ToString()

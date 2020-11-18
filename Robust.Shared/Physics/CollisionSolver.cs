@@ -563,7 +563,7 @@ namespace Robust.Shared.Physics
             var NH = MathF.Abs(WX * SF) + MathF.Abs(WY * CF);  //boundrect half-height
             var NW = MathF.Abs(WX * CF) + MathF.Abs(WY * SF);  //boundrect half-width
 
-            return new Box2((float)(CX - NW), (float)(CY - NH), (float)(CX + NW), (float)(CY + NH)); //draw bound rectangle
+            return new Box2((float)(CY + NH), (float)(CX + NW), (float)(CY - NH), (float)(CX - NW)); //draw bound rectangle
         }
 
         /// <summary>
@@ -682,7 +682,7 @@ namespace Robust.Shared.Physics
         /// </summary>
         public override string ToString()
         {
-            var box = new Box2(-HalfExtents.X, -HalfExtents.Y, HalfExtents.X, HalfExtents.Y).Translated(Center);
+            var box = new Box2(HalfExtents.Y, HalfExtents.X, -HalfExtents.Y, -HalfExtents.X).Translated(Center);
             return $"{box}, {Rotation}";
         }
     }

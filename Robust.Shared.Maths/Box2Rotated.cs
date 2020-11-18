@@ -63,7 +63,7 @@ namespace Robust.Shared.Maths
 
             var NH = Math.Abs(WX * SF) + Math.Abs(WY * CF);  //boundrect half-height
             var NW = Math.Abs(WX * CF) + Math.Abs(WY * SF);  //boundrect half-width
-            return new Box2((float) (CX - NW), (float) (CY - NH), (float) (CX + NW), (float) (CY + NH)); //draw bound rectangle
+            return new Box2((float) (CY + NH), (float) (CX + NW), (float) (CY - NH), (float) (CX - NW)); //draw bound rectangle
         }
 
         #region Equality

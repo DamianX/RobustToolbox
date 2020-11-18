@@ -92,7 +92,7 @@ namespace Robust.UnitTesting.Shared.Maths
         public void Box2EdgesConstructor([ValueSource(nameof(Sources))] (float, float, float, float) test)
         {
             var (left, bottom, right, top) = test;
-            var box = new Box2(left, bottom, right, top);
+            var box = new Box2(top, right, bottom, left);
 
             Assert.That(box.Left, Is.EqualTo(left));
             Assert.That(box.Top, Is.EqualTo(top));
@@ -104,7 +104,7 @@ namespace Robust.UnitTesting.Shared.Maths
         public void Box2CornerVectorProperties([ValueSource(nameof(Sources))] (float, float, float, float) test)
         {
             var (left, bottom, right, top) = test;
-            var box = new Box2(left, bottom, right, top);
+            var box = new Box2(top, right, bottom, left);
 
             var br = new Vector2(right, bottom);
             var tl = new Vector2(left, top);
@@ -160,7 +160,7 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (left, bottom, right, top) = test;
 
-            var box = new Box2(left, bottom, right, top);
+            var box = new Box2(top, right, bottom, left);
 
             Assert.That(box.Intersects(box));
         }
@@ -171,7 +171,7 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (x, y) = test;
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var translatedBox = box.Translated(new Vector2(x, y));
 
             Assert.That(box.Intersects(translatedBox));
@@ -183,7 +183,7 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (x, y) = test;
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var translatedBox = box.Translated(new Vector2(x, y));
 
             Assert.That(box.Intersects(translatedBox), Is.False);
@@ -192,8 +192,8 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2Intersect()
         {
-            var boxOne = new Box2(-1, -1, 1, 1);
-            var boxTwo = new Box2(0, 0, 2, 2);
+            var boxOne = new Box2(1, 1, -1, -1);
+            var boxTwo = new Box2(2, 2, 0, 0);
 
             var result = boxOne.Intersect(boxTwo);
 
@@ -206,8 +206,8 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2NotIntersect()
         {
-            var boxOne = new Box2(-1, -1, 0, 0);
-            var boxTwo = new Box2(0, 0, 2, 2);
+            var boxOne = new Box2(0, 0, -1, -1);
+            var boxTwo = new Box2(2, 2, 0, 0);
 
             var result = boxOne.Intersect(boxTwo);
 
@@ -220,8 +220,8 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2Union()
         {
-            var boxOne = new Box2(-1, -1, 1, 1);
-            var boxTwo = new Box2(0, 0, 2, 2);
+            var boxOne = new Box2(1, 1, -1, -1);
+            var boxTwo = new Box2(2, 2, 0, 0);
 
             var result = boxOne.Union(boxTwo);
 
@@ -238,9 +238,9 @@ namespace Robust.UnitTesting.Shared.Maths
 
             Assert.That(degenerateBox.IsEmpty());
 
-            var tallDegenBox = new Box2(0, -1, 0, 1);
-            var wideDegenBox = new Box2(-1, 0, 1, 0);
-            var meatyBox = new Box2(-1, -1, 1, 1);
+            var tallDegenBox = new Box2(1, 0, -1, 0);
+            var wideDegenBox = new Box2(0, 1, 0, -1);
+            var meatyBox = new Box2(1, 1, -1, -1);
 
             Assert.That(tallDegenBox.IsEmpty(), Is.False);
             Assert.That(wideDegenBox.IsEmpty(), Is.False);
@@ -250,7 +250,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2NotEnclosesSelf()
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
 
             Assert.That(box.Encloses(box), Is.False);
         }
@@ -258,7 +258,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2ScaledEncloses()
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var smallBox = box.Scale(0.5f);
             var bigBox = box.Scale(2.0f);
 
@@ -274,7 +274,7 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (x, y) = test;
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var translatedBox = box.Translated(new Vector2(x, y));
 
             Assert.That(box.Encloses(translatedBox), Is.False);
@@ -284,7 +284,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2NotContainsSelfOpen()
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
 
             Assert.That(box.Contains(box.BottomLeft, false), Is.False);
             Assert.That(box.Contains(box.TopLeft, false), Is.False);
@@ -295,7 +295,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2ContainsSelfClosed()
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
 
             Assert.That(box.Contains(box.BottomLeft));
             Assert.That(box.Contains(box.TopLeft));
@@ -320,7 +320,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2(x, y);
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
 
             Assert.That(box.Contains(x, y));
             Assert.That(box.Contains(vec));
@@ -334,7 +334,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2(x, y);
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
 
             Assert.That(box.Contains(x, y), Is.False);
             Assert.That(box.Contains(vec), Is.False);
@@ -344,7 +344,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2Scale([ValueSource(nameof(Scalars))] float scalar)
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var scaledBox = box.Scale(scalar);
 
             Assert.That(scaledBox.Center, Is.EqualTo(box.Center));
@@ -354,7 +354,7 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2ScaleNegativeException()
         {
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             Assert.That(() => box.Scale(-1), Throws.Exception);
         }
 
@@ -365,7 +365,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var (x, y) = test;
             var vec = new Vector2(x, y);
 
-            var box = new Box2(-1, -1, 1, 1);
+            var box = new Box2(1, 1, -1, -1);
             var scaledBox = box.Translated(vec);
 
             Assert.That(scaledBox.Left, Is.EqualTo(box.Left + x));
@@ -379,9 +379,9 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (left, top, right, bottom) = test;
 
-            var controlBox = new Box2(left, bottom, right, top);
-            var differentBox = new Box2(-MathHelper.Pi, -MathHelper.Pi, MathHelper.Pi, MathHelper.Pi);
-            var sameBox = new Box2(left, bottom, right, top);
+            var controlBox = new Box2(top, right, bottom, left);
+            var differentBox = new Box2(MathHelper.Pi, MathHelper.Pi, -MathHelper.Pi, -MathHelper.Pi);
+            var sameBox = new Box2(top, right, bottom, left);
             Object sameBoxAsObject = sameBox;
             Box2? nullBox = null;
             Vector2 notBox = new Vector2(left, top);
@@ -401,9 +401,9 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (left, top, right, bottom) = test;
 
-            var controlBox = new Box2(left, bottom, right, top);
-            var differentBox = new Box2(-MathHelper.Pi, -MathHelper.Pi, MathHelper.Pi, MathHelper.Pi);
-            var sameBox = new Box2(left, bottom, right, top);
+            var controlBox = new Box2(top, right, bottom, left);
+            var differentBox = new Box2(MathHelper.Pi, MathHelper.Pi, -MathHelper.Pi, -MathHelper.Pi);
+            var sameBox = new Box2(top, right, bottom, left);
 
 #pragma warning disable CS1718 // Comparison made to same variable
             // ReSharper disable once EqualExpressionComparison
@@ -418,9 +418,9 @@ namespace Robust.UnitTesting.Shared.Maths
         {
             var (left, top, right, bottom) = test;
 
-            var controlBox = new Box2(left, bottom, right, top);
-            var differentBox = new Box2(-MathHelper.Pi, -MathHelper.Pi, MathHelper.Pi, MathHelper.Pi);
-            var sameBox = new Box2(left, bottom, right, top);
+            var controlBox = new Box2(top, right, bottom, left);
+            var differentBox = new Box2(MathHelper.Pi, MathHelper.Pi, -MathHelper.Pi, -MathHelper.Pi);
+            var sameBox = new Box2(top, right, bottom, left);
 
 #pragma warning disable CS1718 // Comparison made to same variable
             // ReSharper disable once EqualExpressionComparison
@@ -445,9 +445,9 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Enlarged()
         {
-            var box = new Box2(1, 1, 2, 2).Enlarged(1);
+            var box = new Box2(2, 2, 1, 1).Enlarged(1);
 
-            Assert.That(box, Is.EqualTo(new Box2(0, 0, 3, 3)));
+            Assert.That(box, Is.EqualTo(new Box2(3, 3, 0, 0)));
         }
     }
 }

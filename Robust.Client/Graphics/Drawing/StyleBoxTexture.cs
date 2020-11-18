@@ -170,40 +170,38 @@ namespace Robust.Client.Graphics.Drawing
                 return;
             }
 
-            box = new UIBox2(
-                box.Left - ExpandMarginLeft,
-                box.Top - ExpandMarginTop,
+            box = new UIBox2(box.Top - ExpandMarginTop,
                 box.Right + ExpandMarginRight,
-                box.Bottom + ExpandMarginBottom);
+                box.Bottom + ExpandMarginBottom, box.Left - ExpandMarginLeft);
 
             if (PatchMarginLeft > 0)
             {
                 if (PatchMarginTop > 0)
                 {
                     // Draw top left
-                    var topLeftBox = new UIBox2(0, 0, PatchMarginLeft, PatchMarginTop)
+                    var topLeftBox = new UIBox2(0, PatchMarginLeft, PatchMarginTop, 0)
                         .Translated(box.TopLeft);
                     handle.DrawTextureRectRegion(Texture, topLeftBox,
-                        new UIBox2(0, 0, PatchMarginLeft, PatchMarginTop), Modulate);
+                        new UIBox2(0, PatchMarginLeft, PatchMarginTop, 0), Modulate);
                 }
 
                 {
                     // Draw left
                     var leftBox =
-                        new UIBox2(0, PatchMarginTop, PatchMarginLeft, box.Height - PatchMarginBottom)
+                        new UIBox2(PatchMarginTop, PatchMarginLeft, box.Height - PatchMarginBottom, 0)
                             .Translated(box.TopLeft);
                     DrawStretchingArea(handle, leftBox,
-                        new UIBox2(0, PatchMarginTop, PatchMarginLeft, Texture.Height - PatchMarginBottom));
+                        new UIBox2(PatchMarginTop, PatchMarginLeft, Texture.Height - PatchMarginBottom, 0));
                 }
 
                 if (PatchMarginBottom > 0)
                 {
                     // Draw bottom left
                     var bottomLeftBox =
-                        new UIBox2(0, box.Height - PatchMarginBottom, PatchMarginLeft, box.Height)
+                        new UIBox2(box.Height - PatchMarginBottom, PatchMarginLeft, box.Height, 0)
                             .Translated(box.TopLeft);
                     handle.DrawTextureRectRegion(Texture, bottomLeftBox,
-                        new UIBox2(0, Texture.Height - PatchMarginBottom, PatchMarginLeft, Texture.Height), Modulate);
+                        new UIBox2(Texture.Height - PatchMarginBottom, PatchMarginLeft, Texture.Height, 0), Modulate);
                 }
             }
 
@@ -212,34 +210,34 @@ namespace Robust.Client.Graphics.Drawing
                 if (PatchMarginTop > 0)
                 {
                     // Draw top right
-                    var topRightBox = new UIBox2(box.Width - PatchMarginRight, 0, box.Width, PatchMarginTop)
+                    var topRightBox = new UIBox2(0, box.Width, PatchMarginTop, box.Width - PatchMarginRight)
                         .Translated(box.TopLeft);
                     handle.DrawTextureRectRegion(Texture, topRightBox,
-                        new UIBox2(Texture.Width - PatchMarginRight, 0, Texture.Width, PatchMarginTop), Modulate);
+                        new UIBox2(0, Texture.Width, PatchMarginTop, Texture.Width - PatchMarginRight), Modulate);
                 }
 
                 {
                     // Draw right
                     var rightBox =
-                        new UIBox2(box.Width - PatchMarginRight, PatchMarginTop, box.Width,
-                                box.Height - PatchMarginBottom)
+                        new UIBox2(PatchMarginTop, box.Width,
+                                box.Height - PatchMarginBottom, box.Width - PatchMarginRight)
                             .Translated(box.TopLeft);
 
                     DrawStretchingArea(handle, rightBox,
-                        new UIBox2(Texture.Width - PatchMarginRight, PatchMarginTop,
+                        new UIBox2(PatchMarginTop,
                             Texture.Width,
-                            Texture.Height - PatchMarginBottom));
+                            Texture.Height - PatchMarginBottom, Texture.Width - PatchMarginRight));
                 }
 
                 if (PatchMarginBottom > 0)
                 {
                     // Draw bottom right
                     var bottomRightBox =
-                        new UIBox2(box.Width - PatchMarginRight, box.Height - PatchMarginBottom, box.Width, box.Height)
+                        new UIBox2(box.Height - PatchMarginBottom, box.Width, box.Height, box.Width - PatchMarginRight)
                             .Translated(box.TopLeft);
                     handle.DrawTextureRectRegion(Texture, bottomRightBox,
-                        new UIBox2(Texture.Width - PatchMarginRight, Texture.Height - PatchMarginBottom, Texture.Width,
-                            Texture.Height), Modulate);
+                        new UIBox2(Texture.Height - PatchMarginBottom, Texture.Width,
+                            Texture.Height, Texture.Width - PatchMarginRight), Modulate);
                 }
             }
 
@@ -247,33 +245,33 @@ namespace Robust.Client.Graphics.Drawing
             {
                 // Draw top
                 var topBox =
-                    new UIBox2(PatchMarginLeft, 0, box.Width - PatchMarginRight, PatchMarginTop)
+                    new UIBox2(0, box.Width - PatchMarginRight, PatchMarginTop, PatchMarginLeft)
                         .Translated(box.TopLeft);
                 DrawStretchingArea(handle, topBox,
-                    new UIBox2(PatchMarginLeft, 0, Texture.Width - PatchMarginRight, PatchMarginTop));
+                    new UIBox2(0, Texture.Width - PatchMarginRight, PatchMarginTop, PatchMarginLeft));
             }
 
             if (PatchMarginBottom > 0)
             {
                 // Draw bottom
                 var bottomBox =
-                    new UIBox2(PatchMarginLeft, box.Height - PatchMarginBottom, box.Width - PatchMarginRight,
-                            box.Height)
+                    new UIBox2(box.Height - PatchMarginBottom, box.Width - PatchMarginRight,
+                            box.Height, PatchMarginLeft)
                         .Translated(box.TopLeft);
 
                 DrawStretchingArea(handle, bottomBox,
-                    new UIBox2(PatchMarginLeft, Texture.Height - PatchMarginBottom,
+                    new UIBox2(Texture.Height - PatchMarginBottom,
                         Texture.Width - PatchMarginRight,
-                        Texture.Height));
+                        Texture.Height, PatchMarginLeft));
             }
 
             // Draw center
             {
-                var centerBox = new UIBox2(PatchMarginLeft, PatchMarginTop, box.Width - PatchMarginRight,
-                    box.Height - PatchMarginBottom).Translated(box.TopLeft);
+                var centerBox = new UIBox2(PatchMarginTop, box.Width - PatchMarginRight,
+                    box.Height - PatchMarginBottom, PatchMarginLeft).Translated(box.TopLeft);
 
-                DrawStretchingArea(handle, centerBox, new UIBox2(PatchMarginLeft, PatchMarginTop, Texture.Width - PatchMarginRight,
-                    Texture.Height - PatchMarginBottom));
+                DrawStretchingArea(handle, centerBox, new UIBox2(PatchMarginTop, Texture.Width - PatchMarginRight,
+                    Texture.Height - PatchMarginBottom, PatchMarginLeft));
             }
         }
 

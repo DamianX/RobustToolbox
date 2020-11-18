@@ -18,11 +18,11 @@ namespace Robust.Shared.Maths
         public readonly int Height => Math.Abs(Top - Bottom);
         public readonly Vector2i Size => new Vector2i(Width, Height);
 
-        public Box2i(Vector2i bottomLeft, Vector2i topRight) : this(bottomLeft.X, bottomLeft.Y, topRight.X, topRight.Y)
+        public Box2i(Vector2i bottomLeft, Vector2i topRight) : this(topRight.Y, topRight.X, bottomLeft.Y, bottomLeft.X)
         {
         }
 
-        public Box2i(int left, int bottom, int right, int top)
+        public Box2i(int top, int right, int bottom, int left)
         {
             Left = left;
             Right = right;
@@ -32,7 +32,7 @@ namespace Robust.Shared.Maths
 
         public static Box2i FromDimensions(int left, int bottom, int width, int height)
         {
-            return new Box2i(left, bottom, left + width, bottom + height);
+            return new Box2i(bottom + height, left + width, bottom, left);
         }
 
         public static Box2i FromDimensions(Vector2i position, Vector2i size)
@@ -59,7 +59,7 @@ namespace Robust.Shared.Maths
         /// <summary>Returns a UIBox2 translated by the given amount.</summary>
         public readonly Box2i Translated(Vector2i point)
         {
-            return new Box2i(Left + point.X, Bottom + point.Y, Right + point.X, Top + point.Y);
+            return new Box2i(Top + point.Y, Right + point.X, Bottom + point.Y, Left + point.X);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Robust.Shared.Maths
             var top = Math.Max(Top, other.Top);
 
             if (left <= right && bottom <= top)
-                return new Box2i(left, bottom, right, top);
+                return new Box2i(top, right, bottom, left);
 
             return new Box2i();
         }
@@ -106,12 +106,12 @@ namespace Robust.Shared.Maths
 
         public static explicit operator Box2i(Box2 box)
         {
-            return new Box2i((int) box.Left, (int) box.Bottom, (int) box.Right, (int) box.Top);
+            return new Box2i((int) box.Top, (int) box.Right, (int) box.Bottom, (int) box.Left);
         }
 
         public static implicit operator Box2(Box2i box)
         {
-            return new Box2(box.Left, box.Bottom, box.Right, box.Top);
+            return new Box2(box.Top, box.Right, box.Bottom, box.Left);
         }
 
         public override readonly string ToString()

@@ -68,7 +68,7 @@ namespace Robust.Client.Map
 
                 var point = new Vector2i(column * tileSize, row * tileSize);
 
-                image.Blit(new UIBox2i(0, 0, image.Width, image.Height), sheet, point);
+                image.Blit(new UIBox2i(0, image.Width, image.Height, 0), sheet, point);
 
                 var w = (float) sheet.Width;
                 var h = (float) sheet.Height;

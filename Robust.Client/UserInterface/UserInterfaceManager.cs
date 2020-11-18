@@ -572,8 +572,8 @@ namespace Robust.Client.UserInterface
             if (scissorBox != null)
             {
                 var clipMargin = control.RectDrawClipMargin;
-                var clipTestBox = new UIBox2i(controlBox.Left - clipMargin, controlBox.Top - clipMargin,
-                    controlBox.Right + clipMargin, controlBox.Bottom + clipMargin);
+                var clipTestBox = new UIBox2i(controlBox.Top - clipMargin,
+                    controlBox.Right + clipMargin, controlBox.Bottom + clipMargin, controlBox.Left - clipMargin);
 
                 if (!scissorBox.Value.Intersects(clipTestBox))
                 {

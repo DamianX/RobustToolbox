@@ -97,26 +97,10 @@ namespace Robust.Client.ViewVariables.Editors
                     throw new ArgumentOutOfRangeException();
             }
 
-            // Organization of the editors is different when left vs right handed.
-            switch (_type)
-            {
-                case BoxType.Box2:
-                case BoxType.Box2i:
-                    hBoxContainer.AddChild(left);
-                    hBoxContainer.AddChild(bottom);
-                    hBoxContainer.AddChild(right);
-                    hBoxContainer.AddChild(top);
-                    break;
-                case BoxType.UIBox2:
-                case BoxType.UIBox2i:
-                    hBoxContainer.AddChild(left);
-                    hBoxContainer.AddChild(top);
-                    hBoxContainer.AddChild(right);
-                    hBoxContainer.AddChild(bottom);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            hBoxContainer.AddChild(top);
+            hBoxContainer.AddChild(right);
+            hBoxContainer.AddChild(bottom);
+            hBoxContainer.AddChild(left);
 
             void OnEntered(LineEdit.LineEditEventArgs e)
             {
@@ -128,7 +112,7 @@ namespace Robust.Client.ViewVariables.Editors
                         var topVal = float.Parse(top.Text, CultureInfo.InvariantCulture);
                         var rightVal = float.Parse(right.Text, CultureInfo.InvariantCulture);
                         var bottomVal = float.Parse(bottom.Text, CultureInfo.InvariantCulture);
-                        ValueChanged(new Box2(leftVal, bottomVal, rightVal, topVal));
+                        ValueChanged(new Box2(topVal, rightVal, bottomVal, leftVal));
                         break;
                     }
                     case BoxType.Box2i:
@@ -137,7 +121,7 @@ namespace Robust.Client.ViewVariables.Editors
                         var topVal = int.Parse(top.Text, CultureInfo.InvariantCulture);
                         var rightVal = int.Parse(right.Text, CultureInfo.InvariantCulture);
                         var bottomVal = int.Parse(bottom.Text, CultureInfo.InvariantCulture);
-                        ValueChanged(new Box2i(leftVal, bottomVal, rightVal, topVal));
+                        ValueChanged(new Box2i(topVal, rightVal, bottomVal, leftVal));
                         break;
                     }
                     case BoxType.UIBox2:
@@ -146,7 +130,7 @@ namespace Robust.Client.ViewVariables.Editors
                         var topVal = float.Parse(top.Text, CultureInfo.InvariantCulture);
                         var rightVal = float.Parse(right.Text, CultureInfo.InvariantCulture);
                         var bottomVal = float.Parse(bottom.Text, CultureInfo.InvariantCulture);
-                        ValueChanged(new UIBox2(leftVal, topVal, rightVal, bottomVal));
+                        ValueChanged(new UIBox2(topVal, rightVal, bottomVal, leftVal));
                         break;
                     }
                     case BoxType.UIBox2i:
@@ -155,7 +139,7 @@ namespace Robust.Client.ViewVariables.Editors
                         var topVal = int.Parse(top.Text, CultureInfo.InvariantCulture);
                         var rightVal = int.Parse(right.Text, CultureInfo.InvariantCulture);
                         var bottomVal = int.Parse(bottom.Text, CultureInfo.InvariantCulture);
-                        ValueChanged(new UIBox2i(leftVal, topVal, rightVal, bottomVal));
+                        ValueChanged(new UIBox2i(topVal, rightVal, bottomVal, leftVal));
                         break;
                     }
                     default:

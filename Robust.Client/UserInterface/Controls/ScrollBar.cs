@@ -165,10 +165,10 @@ namespace Robust.Client.UserInterface.Controls
 
             if (_orientation == OrientationMode.Horizontal)
             {
-                return new UIBox2(grabberOffset, 0, grabberEnd, PixelHeight);
+                return new UIBox2(0, grabberEnd, PixelHeight, grabberOffset);
             }
 
-            return new UIBox2(0, grabberOffset, PixelWidth, grabberEnd);
+            return new UIBox2(grabberOffset, PixelWidth, grabberEnd, 0);
         }
 
         private float _getGrabberBoxMinSize()

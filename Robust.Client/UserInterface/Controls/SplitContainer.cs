@@ -188,13 +188,13 @@ namespace Robust.Client.UserInterface.Controls
 
             if (Vertical)
             {
-                FitChildInBox(first, new UIBox2(0, 0, Width, _splitCenter));
-                FitChildInBox(second, new UIBox2(0, _splitCenter + SplitWidth, Width, Height));
+                FitChildInBox(first, new UIBox2(0, Width, _splitCenter, 0));
+                FitChildInBox(second, new UIBox2(_splitCenter + SplitWidth, Width, Height, 0));
             }
             else
             {
-                FitChildInBox(first, new UIBox2(0, 0, _splitCenter, Height));
-                FitChildInBox(second, new UIBox2(_splitCenter + SplitWidth, 0, Width, Height));
+                FitChildInBox(first, new UIBox2(0, _splitCenter, Height, 0));
+                FitChildInBox(second, new UIBox2(0, Width, Height, _splitCenter + SplitWidth));
             }
         }
 

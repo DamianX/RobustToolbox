@@ -261,11 +261,7 @@ namespace Robust.Shared.Map
             var localBounds = CalcLocalBounds();
             var ts = _grid.TileSize;
 
-            var scaledLocalBounds = new Box2(
-                localBounds.Left * ts,
-                localBounds.Bottom * ts,
-                localBounds.Right * ts,
-                localBounds.Top * ts);
+            var scaledLocalBounds = new Box2(localBounds.Top * ts, localBounds.Right * ts, localBounds.Bottom * ts, localBounds.Left * ts);
 
             return scaledLocalBounds.Translated(worldPos);
         }

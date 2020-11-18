@@ -278,7 +278,7 @@ namespace Robust.Shared.Map
         /// <inheritdoc />
         public IEnumerable<TileRef> GetTilesIntersecting(Circle worldArea, bool ignoreEmpty = true, Predicate<TileRef>? predicate = null)
         {
-            var aabb = new Box2(worldArea.Position.X - worldArea.Radius, worldArea.Position.Y - worldArea.Radius, worldArea.Position.X + worldArea.Radius, worldArea.Position.Y + worldArea.Radius);
+            var aabb = new Box2(worldArea.Position.Y + worldArea.Radius, worldArea.Position.X + worldArea.Radius, worldArea.Position.Y - worldArea.Radius, worldArea.Position.X - worldArea.Radius);
 
             foreach (var tile in GetTilesIntersecting(aabb, ignoreEmpty))
             {

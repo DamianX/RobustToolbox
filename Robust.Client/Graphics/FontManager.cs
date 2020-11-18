@@ -156,7 +156,7 @@ namespace Robust.Client.Graphics
                         {
                             using (var bitmapImage = MonoBitMapToImage(bitmap))
                             {
-                                bitmapImage.Blit(new UIBox2i(0, 0, bitmapImage.Width, bitmapImage.Height), atlas,
+                                bitmapImage.Blit(new UIBox2i(0, bitmapImage.Width, bitmapImage.Height, 0), atlas,
                                     (offsetX, offsetY));
                             }
 

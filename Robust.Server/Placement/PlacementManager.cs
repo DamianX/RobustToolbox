@@ -126,7 +126,7 @@ namespace Robust.Server.Placement
         private void PlaceNewTile(ushort tileType, MapId mapId, Vector2 position)
         {
             // tile can snap up to 0.75m away from grid
-            var gridSearchBox = new Box2(-0.5f, -0.5f, 0.5f, 0.5f)
+            var gridSearchBox = new Box2(0.5f, 0.5f, -0.5f, -0.5f)
                 .Scale(1.5f)
                 .Translated(position);
 

@@ -73,7 +73,7 @@ namespace Robust.Client.UserInterface.CustomControls
                 var frameTime = _frameTimes[currentFrameIndex];
                 var frameHeight = FrameHeight * (frameTime * TargetFrameRate);
                 var x = FrameWidth * UserInterfaceManager.UIScale * (TrackedFrames - 1 - i);
-                var rect = new UIBox2(x, PixelHeight - (frameHeight * ratio), x + FrameWidth * UserInterfaceManager.UIScale, PixelHeight);
+                var rect = new UIBox2(PixelHeight - (frameHeight * ratio), x + FrameWidth * UserInterfaceManager.UIScale, PixelHeight, x);
 
                 Color color;
                 if (frameTime > 1f / (TargetFrameRate / 2 - 1))

@@ -125,7 +125,7 @@ namespace Robust.UnitTesting.Shared.Maths
             var sameColor = new Color(rf, gf, bf, af);
             object sameColorAsObject = sameColor;
             Color? nullColor = null;
-            UIBox2 notColor = new UIBox2(rf, gf, bf, af);
+            UIBox2 notColor = new UIBox2(gf, bf, af, rf);
 
 #pragma warning disable NUnit2009
             // This tests that .Equals actually works so ignoring the warning is fine.

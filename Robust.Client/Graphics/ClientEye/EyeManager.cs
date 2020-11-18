@@ -57,7 +57,7 @@ namespace Robust.Client.Graphics.ClientEye
             var right = MathHelper.Max(topLeft.X, topRight.X, bottomRight.X, bottomLeft.X);
             var top = MathHelper.Max(topLeft.Y, topRight.Y, bottomRight.Y, bottomLeft.Y);
 
-            return new Box2(left, bottom, right, top);
+            return new Box2(top, right, bottom, left);
         }
 
         /// <inheritdoc />

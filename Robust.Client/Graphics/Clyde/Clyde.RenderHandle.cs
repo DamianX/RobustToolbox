@@ -47,7 +47,7 @@ namespace Robust.Client.Graphics.Clyde
                 var clydeTexture = ExtractTexture(texture, subRegion, out var csr);
 
                 var (w, h) = clydeTexture.Size;
-                var sr = new Box2(csr.Left / w, (h - csr.Top) / h, csr.Right / w, (h - csr.Bottom) / h);
+                var sr = new Box2((h - csr.Bottom) / h, csr.Right / w, (h - csr.Top) / h, csr.Left / w);
 
                 _clyde.DrawTexture(clydeTexture.TextureId, bl, br, tl, tr, modulate, sr);
             }
@@ -58,7 +58,7 @@ namespace Robust.Client.Graphics.Clyde
                 var clydeTexture = ExtractTexture(texture, subRegion, out var csr);
 
                 var (w, h) = clydeTexture.Size;
-                var sr = new Box2(csr.Left / w, (h - csr.Bottom) / h, csr.Right / w, (h - csr.Top) / h);
+                var sr = new Box2((h - csr.Top) / h, csr.Right / w, (h - csr.Bottom) / h, csr.Left / w);
 
                 _clyde.DrawTexture(clydeTexture.TextureId, bl, br, tl, tr, modulate, sr);
             }
@@ -82,7 +82,7 @@ namespace Robust.Client.Graphics.Clyde
                 }
                 else
                 {
-                    sr = subRegion ?? new UIBox2(0, 0, texture.Width, texture.Height);
+                    sr = subRegion ?? new UIBox2(0, texture.Width, texture.Height, 0);
                 }
 
                 var clydeTexture = (ClydeTexture) texture;

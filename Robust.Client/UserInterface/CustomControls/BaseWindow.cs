@@ -150,7 +150,7 @@ namespace Robust.Client.UserInterface.CustomControls
                     right = Math.Max(args.GlobalPosition.X + DragOffsetBottomRight.X, left + minSizeX);
                 }
 
-                var rect = new UIBox2(left, top, right, bottom);
+                var rect = new UIBox2(top, right, bottom, left);
                 LayoutContainer.SetPosition(this, rect.TopLeft);
                 LayoutContainer.SetSize(this, rect.Size);
             }

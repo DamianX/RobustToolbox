@@ -13,6 +13,7 @@ using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Utility;
+using Serilog.Configuration;
 using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 
@@ -1254,7 +1255,7 @@ namespace Robust.Shared.Serialization
                 var b = float.Parse(args[2], CultureInfo.InvariantCulture);
                 var r = float.Parse(args[3], CultureInfo.InvariantCulture);
 
-                return new UIBox2(l, t, r, b);
+                return new UIBox2(t, r, b, l);
             }
 
             public override YamlNode TypeToNode(object obj, YamlObjectSerializer serializer)
@@ -1275,7 +1276,7 @@ namespace Robust.Shared.Serialization
                 var t = float.Parse(args[2], CultureInfo.InvariantCulture);
                 var r = float.Parse(args[3], CultureInfo.InvariantCulture);
 
-                return new Box2(l, b, r, t);
+                return new Box2(t, r, b, l);
             }
 
             public override YamlNode TypeToNode(object obj, YamlObjectSerializer serializer)

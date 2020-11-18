@@ -130,11 +130,9 @@ Mouse Pos:
             }
 
             var (x, y) = GlobalPixelPosition;
-            var renderBox = new UIBox2(
-                _uiBox.Left - x,
-                _uiBox.Top - y,
+            var renderBox = new UIBox2(_uiBox.Top - y,
                 _uiBox.Right - x,
-                _uiBox.Bottom - y);
+                _uiBox.Bottom - y, _uiBox.Left - x);
 
             handle.DrawRect(renderBox, Color.Red, false);
         }

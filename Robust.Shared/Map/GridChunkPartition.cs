@@ -38,12 +38,12 @@ namespace Robust.Shared.Map
                 var bottom = block.x1;
                 var top = block.x2 + 1;
 
-                rectangles.Add(new Box2(left, bottom, right, top));
+                rectangles.Add(new Box2(top, right, bottom, left));
 
                 if(bounds.Size.Equals(Vector2i.Zero))
-                    bounds = new Box2i(left, bottom, right, top);
+                    bounds = new Box2i(top, right, bottom, left);
                 else
-                    bounds = bounds.Union(new Box2i(left, bottom, right, top));
+                    bounds = bounds.Union(new Box2i(top, right, bottom, left));
             }
         }
 

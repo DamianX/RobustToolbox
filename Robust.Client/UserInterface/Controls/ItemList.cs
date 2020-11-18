@@ -376,7 +376,7 @@ namespace Robust.Client.UserInterface.Controls
 
                 if (item.Text != null)
                 {
-                    var textBox = new UIBox2(contentBox.Left + item.IconSize.X, contentBox.Top, contentBox.Right, contentBox.Bottom);
+                    var textBox = new UIBox2(contentBox.Top, contentBox.Right, contentBox.Bottom, contentBox.Left + item.IconSize.X);
                     DrawTextInternal(handle, item.Text, textBox);
                 }
 

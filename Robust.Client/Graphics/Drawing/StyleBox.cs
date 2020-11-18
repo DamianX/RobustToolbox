@@ -160,12 +160,9 @@ namespace Robust.Client.Graphics.Drawing
         /// <param name="box"></param>
         public void Draw(DrawingHandleScreen handle, UIBox2 box)
         {
-            box = new UIBox2(
-                box.Left + PaddingLeft,
-                box.Top + PaddingTop,
+            box = new UIBox2(box.Top + PaddingTop,
                 box.Right - PaddingRight,
-                box.Bottom - PaddingBottom
-            );
+                box.Bottom - PaddingBottom, box.Left + PaddingLeft);
 
             DoDraw(handle, box);
         }
@@ -240,7 +237,7 @@ namespace Robust.Client.Graphics.Drawing
             var right = baseBox.Right - GetContentMargin(Margin.Right);
             var bottom = baseBox.Bottom - GetContentMargin(Margin.Bottom);
 
-            return new UIBox2(left, top, right, bottom);
+            return new UIBox2(top, right, bottom, left);
         }
 
         /// <summary>

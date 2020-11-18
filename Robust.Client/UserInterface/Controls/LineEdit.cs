@@ -844,15 +844,15 @@ namespace Robust.Client.UserInterface.Controls
 
                     if (selectionLower != selectionUpper)
                     {
-                        handle.DrawRect(new UIBox2(selectionLower, contentBox.Top, selectionUpper, contentBox.Bottom),
+                        handle.DrawRect(new UIBox2(contentBox.Top, selectionUpper, contentBox.Bottom, selectionLower),
                             Color.CornflowerBlue.WithAlpha(0.25f));
                     }
 
                     if (_master._cursorCurrentlyLit)
                     {
                         handle.DrawRect(
-                            new UIBox2(actualCursorPosition, contentBox.Top, actualCursorPosition + 1,
-                                contentBox.Bottom), Color.White);
+                            new UIBox2(contentBox.Top, actualCursorPosition + 1,
+                                contentBox.Bottom, actualCursorPosition), Color.White);
                     }
                 }
             }

@@ -9,8 +9,8 @@ namespace Robust.UnitTesting.Shared.Maths
         [Test]
         public void Box2iUnion()
         {
-            var boxOne = new Box2i(-1, -1, 1, 1);
-            var boxTwo = new Box2i(0, 0, 2, 2);
+            var boxOne = new Box2i(1, 1, -1, -1);
+            var boxTwo = new Box2i(2, 2, 0, 0);
 
             var result = boxOne.Union(boxTwo);
 

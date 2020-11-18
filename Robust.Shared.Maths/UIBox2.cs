@@ -38,11 +38,11 @@ namespace Robust.Shared.Maths
         public readonly Vector2 Size => new Vector2(Width, Height);
         public readonly Vector2 Center => TopLeft + Size / 2;
 
-        public UIBox2(Vector2 leftTop, Vector2 rightBottom) : this(leftTop.X, leftTop.Y, rightBottom.X, rightBottom.Y)
+        public UIBox2(Vector2 leftTop, Vector2 rightBottom) : this(leftTop.Y, rightBottom.X, rightBottom.Y, leftTop.X)
         {
         }
 
-        public UIBox2(float left, float top, float right, float bottom)
+        public UIBox2(float top, float right, float bottom, float left)
         {
             Left = left;
             Right = right;
@@ -52,7 +52,7 @@ namespace Robust.Shared.Maths
 
         public static UIBox2 FromDimensions(float left, float top, float width, float height)
         {
-            return new UIBox2(left, top, left + width, top + height);
+            return new UIBox2(top, left + width, top + height, left);
         }
 
         public static UIBox2 FromDimensions(Vector2 leftTopPosition, Vector2 size)
@@ -117,7 +117,7 @@ namespace Robust.Shared.Maths
         /// <summary>Returns a UIBox2 translated by the given amount.</summary>
         public readonly UIBox2 Translated(Vector2 point)
         {
-            return new UIBox2(Left + point.X, Top + point.Y, Right + point.X, Bottom + point.Y);
+            return new UIBox2(Top + point.Y, Right + point.X, Bottom + point.Y, Left + point.X);
         }
 
         public readonly bool Equals(UIBox2 other)
@@ -164,7 +164,7 @@ namespace Robust.Shared.Maths
         {
             var (lo, to, ro, bo) = offsets;
 
-            return new UIBox2(box.Left + lo, box.Top + to, box.Right + ro, box.Bottom + bo);
+            return new UIBox2(box.Top + to, box.Right + ro, box.Bottom + bo, box.Left + lo);
         }
 
         public override readonly string ToString()

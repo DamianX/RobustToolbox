@@ -20,8 +20,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void IsCollidingFalse()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
-            var testBox = new Box2(-3, -3, 4, 6);
+            var box = new Box2(6, 10, -5, 5);
+            var testBox = new Box2(6, 4, -3, -3);
             var manager = new PhysicsManager();
 
             var mock = new Mock<IPhysBody>();
@@ -43,8 +43,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void IsCollidingInclusive()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
-            var testBox = new Box2(-3, -3, 5, 6);
+            var box = new Box2(6, 10, -5, 5);
+            var testBox = new Box2(6, 5, -3, -3);
             var manager = new PhysicsManager();
 
             var mock = new Mock<IPhysBody>();
@@ -66,8 +66,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void IsCollidingTrue()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
-            var testBox = new Box2(-3, -3, 6, 6);
+            var box = new Box2(6, 10, -5, 5);
+            var testBox = new Box2(6, 6, -3, -3);
             var manager = new PhysicsManager();
 
             var mock = new Mock<IPhysBody>();
@@ -89,8 +89,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void IsCollidingFalseNoLayer()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
-            var testBox = new Box2(-3, -3, 6, 6);
+            var box = new Box2(6, 10, -5, 5);
+            var testBox = new Box2(6, 6, -3, -3);
             var manager = new PhysicsManager();
 
             var mock = new Mock<IPhysBody>();
@@ -112,8 +112,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void IsCollidingWrongMap()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
-            var testBox = new Box2(-3, -3, 5, 6);
+            var box = new Box2(6, 10, -5, 5);
+            var testBox = new Box2(6, 5, -3, -3);
             var manager = new PhysicsManager();
 
             var mock = new Mock<IPhysBody>();
@@ -135,7 +135,7 @@ namespace Robust.UnitTesting.Shared.Physics
         public void RayCast()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
+            var box = new Box2(6, 10, -5, 5);
             var ray = new CollisionRay(new Vector2(0, 1), Vector2.UnitX, 1);
             var manager = new PhysicsManager();
 
@@ -164,7 +164,7 @@ namespace Robust.UnitTesting.Shared.Physics
         public void RayCastMissUp()
         {
             // Arrange
-            var box = new Box2(5, -5, 10, 6);
+            var box = new Box2(6, 10, -5, 5);
             var ray = new CollisionRay(new Vector2(4.99999f, 1), Vector2.UnitY, 1);
             var manager = new PhysicsManager();
 
@@ -187,8 +187,8 @@ namespace Robust.UnitTesting.Shared.Physics
         public void MultiHitRayCast()
         {
             // Arrange
-            var b1 = new Box2(5, -5, 10, 6);
-            var b2 = new Box2(6, -10, 7, 10);
+            var b1 = new Box2(6, 10, -5, 5);
+            var b2 = new Box2(10, 7, -10, 6);
             var ray = new CollisionRay(Vector2.UnitY, Vector2.UnitX, 1);
             var manager = new PhysicsManager();
 
@@ -234,7 +234,7 @@ namespace Robust.UnitTesting.Shared.Physics
             var mockEntity1 = new Mock<IEntity>().Object;
 
             var mock0 = new Mock<IPhysBody>();
-            mock0.Setup(foo => foo.WorldAABB).Returns(new Box2(-3, -3, 6, 6));
+            mock0.Setup(foo => foo.WorldAABB).Returns(new Box2(6, 6, -3, -3));
             mock0.Setup(foo => foo.MapID).Returns(new MapId(1));
             mock0.Setup(foo => foo.CanCollide).Returns(true);
             mock0.Setup(foo => foo.CollisionLayer).Returns(0x4);
@@ -244,7 +244,7 @@ namespace Robust.UnitTesting.Shared.Physics
             manager.AddBody(staticBody);
 
             var mock1 = new Mock<IPhysBody>();
-            mock1.Setup(foo => foo.WorldAABB).Returns(new Box2(5, -5, 10, 6));
+            mock1.Setup(foo => foo.WorldAABB).Returns(new Box2(6, 10, -5, 5));
             mock1.Setup(foo => foo.MapID).Returns(new MapId(1));
             mock1.Setup(foo => foo.CanCollide).Returns(true);
             mock1.Setup(foo => foo.CollisionLayer).Returns(0x4);
